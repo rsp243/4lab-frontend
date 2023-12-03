@@ -1,0 +1,24 @@
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card .introduction {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    color: white;
+}
+
+.card .introduction h3 {
+    margin: 0;
+}
+
+header .introduction strong {
+    margin: 0 0 0 15px;
+}
+
+.p-menubar {
+    width: 100%;
+} 
