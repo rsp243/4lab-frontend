@@ -1,15 +1,14 @@
+import RSelector from '../components/App/GraphicValues/RSelector';
+import XSelector from '../components/App/GraphicValues/XSelector';
+import YSelector from '../components/App/GraphicValues/YSelector';
 import './src/css/App.css';
 
 export default function App() {
 	return (
 		<div className="App">
-			This is my App page
+			<XSelector />
+			<YSelector />
+			<RSelector />
 		</div>
-	);
-}
-
-function MyButton({ name }) {
-	return (
-		<button>{name}, Learn React</button>
 	);
 }
