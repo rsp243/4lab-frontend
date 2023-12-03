@@ -44,7 +44,7 @@ export default function NavigationBar({start}) {
     ];
 
     return (
-        <div className="card">
+        <div className="card w-full">
             <Menubar model={items} start={start} end={logout} />
         </div>
     )
