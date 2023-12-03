@@ -1,3 +1,9 @@
 body{ 
   	margin: 0;
 }
+
+#canvas {
+	padding: 10px;
+	border-radius: 10%;
+	background-color: #343e4d;
+}

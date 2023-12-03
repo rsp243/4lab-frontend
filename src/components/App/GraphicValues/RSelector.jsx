@@ -15,7 +15,7 @@ export default function RSelector() {
 	];
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card mt-2 mb-4">
             <Dropdown value={selectedR} onChange={(e) => setSelectedR(e.value)} options={values} optionLabel="name"
                 placeholder="Select R value" className="w-full md:w-14rem" />
         </div>

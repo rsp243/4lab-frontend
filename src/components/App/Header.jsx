@@ -7,9 +7,13 @@ import './src/css/header.css';
 
 export default function Header() {
     return (
-        <header>
-            <NavigationBar start={<Introduction />} />
-            <Outlet />  
-        </header>
+        <>
+            <header>
+                <NavigationBar start={<Introduction />} />
+            </header>
+            <div className="content">
+                <Outlet />
+            </div>
+        </>
     );
 }

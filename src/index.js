@@ -4,6 +4,7 @@ import { PrimeReactProvider } from 'primereact/api';
 
 import "primereact/resources/themes/bootstrap4-dark-blue/theme.css";
 import 'primeicons/primeicons.css';
+import '/node_modules/primeflex/primeflex.css';
 import './index.css';
 
 import Router from './components/Router/Router.jsx'

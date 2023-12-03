@@ -15,7 +15,7 @@ export default function XSelector() {
 	];
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card my-2">
             <Dropdown value={selectedX} onChange={(e) => setSelectedX(e.value)} options={values} optionLabel="name"
                 placeholder="Select X value" className="w-full md:w-14rem" />
         </div>
