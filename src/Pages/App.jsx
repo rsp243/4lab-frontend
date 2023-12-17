@@ -13,8 +13,12 @@ import '../canvas';
 
 export default function App({ getToken }) {
 	const [xValue, setXValue] = useState()
-	const [yValue, setYValue] = useState(0)
+	const [yValue, setYValue] = useState()
 	const [rValue, setRValue] = useState()
+	const [isCorrectX, setIsCorrectX] = useState();
+	const [isCorrectY, setIsCorrectY] = useState();
+	const [isCorrectR, setIsCorrectR] = useState();
+
 	const msgs = useRef(null);
 
 	const [results, setResults] = useState();
@@ -124,9 +128,9 @@ export default function App({ getToken }) {
 			<div className="card flex flex-column justify-content-center align-items-center">
 				<Canvas />
 				<Selectors
-					xValue={xValue} setXValue={setXValue}
-					yValue={yValue} setYValue={setYValue}
-					rValue={rValue} setRValue={setRValue}
+					xValue={xValue} setXValue={setXValue} isCorrectX={isCorrectX} setIsCorrectX={setIsCorrectX}
+					yValue={yValue} setYValue={setYValue} isCorrectY={isCorrectY} setIsCorrectY={setIsCorrectY} 
+					rValue={rValue} setRValue={setRValue} isCorrectR={isCorrectR} setIsCorrectR={setIsCorrectR} 
 				/>
 				<ButtonBlock 
 					handleThrowClick={handleThrowClick} 

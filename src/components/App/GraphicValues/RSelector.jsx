@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Dropdown } from 'primereact/dropdown';
+import { Message } from 'primereact/message';
 
-export default function RSelector({selectedR, setSelectedR}) {
+export default function RSelector({ selectedR, setSelectedR, isCorrectR, setIsCorrectR }) {
 	const values = [
 		{ name: '-2.0' },
 		{ name: '-1.5' },
@@ -15,14 +17,35 @@ export default function RSelector({selectedR, setSelectedR}) {
 		{ name: '2.0' },
 	];
 
-    return (
-        <div className="card mt-2 mb-4">
-            <Dropdown value={selectedR} onChange={(e) => setSelectedR(e.value)} options={values} optionLabel="name"
-                placeholder="Select R value" className="w-full md:w-14rem" />
-        </div>
-    );
+	function handleChange(e) {
+		if (!values.includes(e)) {
+			setIsCorrectR(false)
+		} else {
+			setIsCorrectR(true)
+		}
+	}
+
+	return (
+		<>
+			<div className="card mt-2 mb-2">
+				<Dropdown value={selectedR} 
+					onChange={(e) => {
+						setSelectedR(e.value)
+						handleChange(e.value)
+					}}
+					options={values} optionLabel="name"
+					placeholder="Select R value"
+					className="w-full md:w-14rem" />
+			</div>
+			{
+				!isCorrectR &&
+				<Message className='mb-2' severity="error" text="Passed R don't belong availible values" />
+			}
+		</>
+	);
 }
 
 RSelector.propTypes = {
-    setSelectedR: PropTypes.func.isRequired,
+	setSelectedR: PropTypes.func.isRequired,
+	setIsCorrectR: PropTypes.func.isRequired,
 };
