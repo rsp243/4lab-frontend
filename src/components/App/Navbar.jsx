@@ -1,10 +1,19 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router'
+
+import PropTypes from 'prop-types';
 import { Menubar } from 'primereact/menubar';
-import { Button } from 'primereact/button';
 
-export default function NavigationBar({start}) {
-    const logout = <a href="/logout"><Button label="Logout" icon="pi pi-fw pi-sign-out" /></a>
+function logout(navigate) {
+    sessionStorage.removeItem("token");
+    navigate(0)
+}
 
-    const items = [
+export default function NavigationBar({start, getToken}) {
+    const navigate = useNavigate()
+    const token = getToken()
+
+    const notAuthorizedItems = [
         {
             label: 'Home',
             icon: 'pi pi-fw pi-home',
@@ -29,23 +38,53 @@ export default function NavigationBar({start}) {
                     icon: 'pi pi-fw pi-sign-in',
                     url: "/login",
                 },
-                {
-                    label: 'Search',
-                    icon: 'pi pi-fw pi-users',
-                    items: [
-                        {
-                            icon: 'pi pi-fw pi-bars',
-                            label: 'List'
-                        }
-                    ]
-                }
             ]
         },
     ];
 
+    const items = [
+        {
+            label: 'Main Page',
+            icon: 'pi pi-fw',
+            url: "/",
+        },
+        {
+            label: 'Home',
+            icon: 'pi pi-fw pi-home',
+            url: "/home",
+        },
+        {
+            label: 'About',
+            icon: 'pi pi-fw pi-info-circle',
+            url: "/about",
+        },
+        {
+            label: 'Users',
+            icon: 'pi pi-fw pi-user',
+            items: [
+                {
+                    label: 'Logout',
+                    icon: 'pi pi-fw pi-user-minus',
+                    command: () => logout(navigate),
+                },
+            ]
+        },
+    ];
+
+    if (!token) {
+        return (
+            <div className="card w-full">
+                <Menubar model={notAuthorizedItems} start={start} />
+            </div>
+        )        
+    }
     return (
         <div className="card w-full">
-            <Menubar model={items} start={start} end={logout} />
+            <Menubar model={items} start={start} />
         </div>
-    )
+    )   
 }
+
+NavigationBar.propTypes = {
+    getToken: PropTypes.func.isRequired
+};

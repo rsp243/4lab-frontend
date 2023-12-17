@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ButtonBlock from '../components/App/ActionButtonBlock';
 import Canvas from '../components/App/Canvas';
 import Selectors from '../components/App/GraphicValues/Selectors';
