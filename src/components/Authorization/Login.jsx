@@ -41,7 +41,7 @@ export default function Login({ setToken }) {
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
                     console.log(error.response.data);
-                    myError = error.response.data.status + " " + error.response.data.message
+                    myError = error.response.data.message
                 } else {
                     // Something happened in setting up the request that triggered an Error
                     console.log('Error', error.message);

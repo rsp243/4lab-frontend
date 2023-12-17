@@ -13,14 +13,8 @@ import Header from '../App/Header.jsx';
 import Register from "../Authorization/Register.jsx";
 import Login from "../Authorization/Login.jsx";
 
-function getToken() {
-    let token = sessionStorage.getItem('token');
-    return token;
-}
+import { getToken, setTokenLS, logout } from "../Authorization/token.js";
 
-function setTokenLS(userToken) {
-    sessionStorage.setItem('token', userToken);
-}
 
 export default function Router() {
     let token = getToken()
@@ -30,7 +24,7 @@ export default function Router() {
             <BrowserRouter>
                 <Routes>
                     <Route path='*' element={<NotFound />} />
-                    <Route path="/" element={<Header getToken={getToken}/>}>
+                    <Route path="/" element={<Header getToken={getToken} logout={logout}/>}>
                         <Route path="/home" element={<Home />} />
                         <Route path="/about" element={<About />} />
                     </Route>

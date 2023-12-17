@@ -4,13 +4,7 @@ import { useNavigate } from 'react-router'
 import PropTypes from 'prop-types';
 import { Menubar } from 'primereact/menubar';
 
-function logout(navigate) {
-    sessionStorage.removeItem("token");
-    navigate("/home", {replace: true})
-    navigate(0)
-}
-
-export default function NavigationBar({start, getToken}) {
+export default function NavigationBar({start, getToken, logout}) {
     const navigate = useNavigate()
     const token = getToken()
 
