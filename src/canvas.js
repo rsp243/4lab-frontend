@@ -27,15 +27,15 @@ function drawBeginnigGraph(canvasIdStr) {
 
     // filling area
     // rectangle
-    ctx.fillRect(canvas.width / 2, canvas.height / 2, -canvas.width / 3, -canvas.height / 3);
+    ctx.fillRect(canvas.width / 2, canvas.height / 2, -canvas.width / 3, -canvas.height / 6);
     ctx.moveTo(canvas.width / 2, canvas.height / 2);
     // 1/4 of circle
-    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 3, -1.57, 0, 0);
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 6, -1.57, 0, 0);
     ctx.fill();
     // triangle
     ctx.moveTo(canvas.width / 2, canvas.height / 2);
-    ctx.lineTo(canvas.width / 2, canvas.height / 1.2);
-    ctx.lineTo(canvas.width / 3, canvas.height / 2);
+    ctx.lineTo(canvas.width / 2, canvas.height / 1.5);
+    ctx.lineTo(canvas.width / 6, canvas.height / 2);
     ctx.lineTo(canvas.width / 2, canvas.height / 2);
     ctx.fill();
 
