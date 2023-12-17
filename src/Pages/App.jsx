@@ -20,7 +20,6 @@ export default function App({ getToken }) {
 	const [isCorrectR, setIsCorrectR] = useState();
 
 	const msgs = useRef(null);
-
 	const [results, setResults] = useState();
 
 	useEffect(() => {
@@ -52,6 +51,13 @@ export default function App({ getToken }) {
 
 	const handleThrowClick = async e => {
 		e.preventDefault();
+
+		if (!(isCorrectX && isCorrectY && isCorrectR)) {
+			msgs.current.show([
+				{ sticky: false, life: 5000, severity: 'error', summary: 'Error', detail: 'You chose invalid values in selectors. Fix all error messages', closable: false },
+			])
+			return;
+		}
 
 		let data = {
 			x: parseFloat(xValue.name),
@@ -129,11 +135,11 @@ export default function App({ getToken }) {
 				<Canvas />
 				<Selectors
 					xValue={xValue} setXValue={setXValue} isCorrectX={isCorrectX} setIsCorrectX={setIsCorrectX}
-					yValue={yValue} setYValue={setYValue} isCorrectY={isCorrectY} setIsCorrectY={setIsCorrectY} 
-					rValue={rValue} setRValue={setRValue} isCorrectR={isCorrectR} setIsCorrectR={setIsCorrectR} 
+					yValue={yValue} setYValue={setYValue} isCorrectY={isCorrectY} setIsCorrectY={setIsCorrectY}
+					rValue={rValue} setRValue={setRValue} isCorrectR={isCorrectR} setIsCorrectR={setIsCorrectR}
 				/>
-				<ButtonBlock 
-					handleThrowClick={handleThrowClick} 
+				<ButtonBlock
+					handleThrowClick={handleThrowClick}
 					handleAnotherAttemptClick={handleAnotherAttemptClick} />
 				<Messages ref={msgs} />
 				<ResultTable results={results} />
