@@ -11,14 +11,17 @@ import ResultTable from '../components/App/ResultTable';
 import './src/css/App.css';
 import '../canvas';
 
-export default function App({getToken}) {
+export default function App({ getToken }) {
 	const [xValue, setXValue] = useState()
 	const [yValue, setYValue] = useState(0)
 	const [rValue, setRValue] = useState()
 	const msgs = useRef(null);
+	const [results, setResults] = useState([]);
 
 	const handleThrowClick = async e => {
 		e.preventDefault();
+
+		let newResults;
 
 		let data = {
 			x: parseFloat(xValue.name),
@@ -31,26 +34,29 @@ export default function App({getToken}) {
 			.then(res => {
 				console.log(res.status);
 				console.log(res.data);
+				setResults(results => (
+					[...results, res.data]
+				))
 				msgs.current.show([
 					{ sticky: false, life: 2000, severity: 'success', summary: 'Success', detail: 'Successfully throwed', closable: false },
 				])
 			})
 			.catch(function (error) {
-                let myError = "";
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log(error.response.data);
-                    myError = error.response.data.status + " " + error.response.data.message
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
-                    myError = "An error during request setting up has happened"
-                }
-                msgs.current.show([
-                    { severity: 'error', life: 5000, summary: 'Error', detail: myError, sticky: false, closable: false }
-                ]);
-            });
+				let myError = "";
+				if (error.response) {
+					// The request was made and the server responded with a status code
+					// that falls out of the range of 2xx
+					console.log(error.response.data);
+					myError = error.response.data.status + " " + error.response.data.message
+				} else {
+					// Something happened in setting up the request that triggered an Error
+					console.log('Error', error.message);
+					myError = "An error during request setting up has happened"
+				}
+				msgs.current.show([
+					{ severity: 'error', life: 5000, summary: 'Error', detail: myError, sticky: false, closable: false }
+				]);
+			});
 	}
 
 	return (
@@ -64,12 +70,12 @@ export default function App({getToken}) {
 				/>
 				<ButtonBlock handleThrowClick={handleThrowClick} />
 				<Messages ref={msgs} />
-				<ResultTable />
+				<ResultTable results={results} />
 			</div>
 		</div>
 	);
 }
 
 App.propTypes = {
-    getToken: PropTypes.func.isRequired
+	getToken: PropTypes.func.isRequired
 };
