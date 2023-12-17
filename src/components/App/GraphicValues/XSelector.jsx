@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { Dropdown } from 'primereact/dropdown';
 
-export default function XSelector() {
-    const [selectedX, setSelectedX] = useState(null);
+export default function XSelector({selectedX, setSelectedX}) {
 	const values = [
 		{ name: '-2.0' },
 		{ name: '-1.5' },
 		{ name: '-1.0' },
 		{ name: '-0.5' },
+		{ name: '0.0' },
 		{ name: '0.5' },
 		{ name: '1.0' },
 		{ name: '1.5' },
@@ -21,3 +22,7 @@ export default function XSelector() {
         </div>
     );
 }
+
+XSelector.propTypes = {
+    setSelectedX: PropTypes.func.isRequired,
+};

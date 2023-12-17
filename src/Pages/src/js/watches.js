@@ -56,8 +56,6 @@ $(function(){
 
 	var weekdays = clock.find('.weekdays span');
 
-	console.log(moment().format("hhmmssdA"));
-
 	// Run a timer every second and update the clock
 
 	(function update_time(){
@@ -68,8 +66,6 @@ $(function(){
 		// d is for day of week and A is for AM/PM
 
 		var now = moment().format("hhmmssdA");
-
-        console.log(now);
 
 		digits.h1.attr('class', digit_to_name[now[0]]);
 		digits.h2.attr('class', digit_to_name[now[1]]);
@@ -97,7 +93,7 @@ $(function(){
 		// Set the am/pm text:
 		ampm.text(now[7]+now[8]);
 		
-		// Schedule this function to be run again in 11 sec
+		// Schedule this function to be run again in 1 sec
 		setTimeout(update_time, 1000);
 	})();
 });

@@ -1,10 +1,10 @@
+import PropTypes from 'prop-types';
+
 import { useState } from 'react';
 import { Slider } from "primereact/slider";
 import { InputText } from "primereact/inputtext";
 
-export default function YSelector() {
-    const [selectedY, setSelectedY] = useState(0);
-
+export default function YSelector({selectedY, setSelectedY}) {
     return (
         <div className="card flex justify-content-center my-3">
             <div className="w-14rem">
@@ -16,3 +16,7 @@ export default function YSelector() {
         </div>
     );
 }
+
+YSelector.propTypes = {
+    setSelectedY: PropTypes.func.isRequired,
+};

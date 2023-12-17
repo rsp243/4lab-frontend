@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import axios from "axios";
+import PropTypes from 'prop-types';
+import { Messages } from 'primereact/messages';
+import { useState, useRef } from 'react';
+
 import ButtonBlock from '../components/App/ActionButtonBlock';
 import Canvas from '../components/App/Canvas';
 import Selectors from '../components/App/GraphicValues/Selectors';
@@ -7,15 +11,65 @@ import ResultTable from '../components/App/ResultTable';
 import './src/css/App.css';
 import '../canvas';
 
-export default function App() {
+export default function App({getToken}) {
+	const [xValue, setXValue] = useState()
+	const [yValue, setYValue] = useState(0)
+	const [rValue, setRValue] = useState()
+	const msgs = useRef(null);
+
+	const handleThrowClick = async e => {
+		e.preventDefault();
+
+		let data = {
+			x: parseFloat(xValue.name),
+			y: parseFloat(yValue),
+			r: parseFloat(rValue.name),
+			token: getToken()
+		}
+
+		axios.post(`http://localhost:8080/api/v1/point/add`, data)
+			.then(res => {
+				console.log(res.status);
+				console.log(res.data);
+				msgs.current.show([
+					{ sticky: false, life: 2000, severity: 'success', summary: 'Success', detail: 'Successfully throwed', closable: false },
+				])
+			})
+			.catch(function (error) {
+                let myError = "";
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    myError = error.response.data.status + " " + error.response.data.message
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                    myError = "An error during request setting up has happened"
+                }
+                msgs.current.show([
+                    { severity: 'error', life: 5000, summary: 'Error', detail: myError, sticky: false, closable: false }
+                ]);
+            });
+	}
+
 	return (
 		<div className="App">
 			<div className="card flex flex-column justify-content-center align-items-center">
 				<Canvas />
-				<Selectors />
-				<ButtonBlock />
+				<Selectors
+					xValue={xValue} setXValue={setXValue}
+					yValue={yValue} setYValue={setYValue}
+					rValue={rValue} setRValue={setRValue}
+				/>
+				<ButtonBlock handleThrowClick={handleThrowClick} />
+				<Messages ref={msgs} />
 				<ResultTable />
 			</div>
 		</div>
 	);
 }
+
+App.propTypes = {
+    getToken: PropTypes.func.isRequired
+};

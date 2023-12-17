@@ -6,6 +6,7 @@ import { Menubar } from 'primereact/menubar';
 
 function logout(navigate) {
     sessionStorage.removeItem("token");
+    navigate("/home", {replace: true})
     navigate(0)
 }
 
@@ -45,7 +46,7 @@ export default function NavigationBar({start, getToken}) {
     const items = [
         {
             label: 'Main Page',
-            icon: 'pi pi-fw',
+            icon: 'pi pi-fw pi-table',
             url: "/",
         },
         {

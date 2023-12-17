@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-
 import PropTypes from 'prop-types';
+
 import { Link } from "react-router-dom";
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
@@ -25,14 +25,14 @@ export default function Login({ setToken }) {
         msgs.current.clear();
         axios.post(`http://localhost:8080/api/v1/auth/login`, credentials)
             .then(res => {
-                console.log(res.status);
                 console.log(res.data);
                 setToken(res.data.token);
                 msgs.current.show([
                     { sticky: false, life: 2000, severity: 'success', summary: 'Success', detail: 'Successfully logged in', closable: false },
                 ])
                 setTimeout(() => {
-                    navigate('/', { replace: true })
+                    navigate('/home', { replace: true })
+                    navigate(0)
                 }, 2000)
             })
             .catch(function (error) {

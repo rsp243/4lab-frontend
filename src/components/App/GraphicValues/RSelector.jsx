@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { Dropdown } from 'primereact/dropdown';
 
-export default function RSelector() {
-    const [selectedR, setSelectedR] = useState(null);
+export default function RSelector({selectedR, setSelectedR}) {
 	const values = [
 		{ name: '-2.0' },
 		{ name: '-1.5' },
 		{ name: '-1.0' },
 		{ name: '-0.5' },
+		{ name: '0.0' },
 		{ name: '0.5' },
 		{ name: '1.0' },
 		{ name: '1.5' },
@@ -21,3 +22,7 @@ export default function RSelector() {
         </div>
     );
 }
+
+RSelector.propTypes = {
+    setSelectedR: PropTypes.func.isRequired,
+};

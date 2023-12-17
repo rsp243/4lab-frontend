@@ -19,20 +19,19 @@ function getToken() {
 }
 
 function setTokenLS(userToken) {
-    sessionStorage.setItem('token', JSON.stringify(userToken));
-    getToken()
+    sessionStorage.setItem('token', userToken);
 }
 
 export default function Router() {
     let token = getToken()
-    
+
     if (!token) {
         return (
             <BrowserRouter>
                 <Routes>
                     <Route path='*' element={<NotFound />} />
                     <Route path="/" element={<Header getToken={getToken}/>}>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/home" element={<Home />} />
                         <Route path="/about" element={<About />} />
                     </Route>
                     <Route path="/register" element={<Register />} />
@@ -47,7 +46,7 @@ export default function Router() {
             <Routes>
                 <Route path='*' element={<NotFound />} />
                 <Route path="/" element={<Header getToken={getToken}/>}>
-                    <Route path="/" element={<App />} />
+                    <Route path="/" element={<App getToken={getToken}/>} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
                 </Route>
