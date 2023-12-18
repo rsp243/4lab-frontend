@@ -20,34 +20,32 @@ export default function App({ getToken }) {
 	const [isCorrectR, setIsCorrectR] = useState();
 
 	const msgs = useRef(null);
-	const [results, setResults] = useState();
+	const [results, setResults] = useState([]);
 
 	useEffect(() => {
-		setResults(
-			axios.post(`http://localhost:8080/api/v1/point/getAll`, { token: getToken() })
-				.then(res => {
-					console.log(res.status);
-					console.log(res.data);
-					setResults(res.data)
-				})
-				.catch(function (error) {
-					let myError = "";
-					if (error.response) {
-						// The request was made and the server responded with a status code
-						// that falls out of the range of 2xx
-						console.log(error.response.data);
-						myError = error.response.data.status + " " + error.response.data.message
-					} else {
-						// Something happened in setting up the request that triggered an Error
-						console.log('Error', error.message);
-						myError = "An error during request setting up has happened"
-					}
-					msgs.current.show([
-						{ severity: 'error', life: 5000, summary: 'Error', detail: myError, sticky: false, closable: false }
-					]);
-				})
-		)
-	}, [])
+		axios.post(`http://localhost:8080/api/v1/point/getAll`, { token: getToken() })
+			.then(res => {
+				console.log(res.status);
+				console.log(res.data);
+				setResults(res.data);
+			})
+			.catch(function (error) {
+				let myError = "";
+				if (error.response) {
+					// The request was made and the server responded with a status code
+					// that falls out of the range of 2xx
+					console.log(error.response.data);
+					myError = error.response.data.message
+				} else {
+					// Something happened in setting up the request that triggered an Error
+					console.log('Error', error.message);
+					myError = "An error during request setting up has happened"
+				}
+				msgs.current.show([
+					{ severity: 'error', life: 5000, summary: 'Error', detail: myError, sticky: false, closable: false }
+				]);
+			})
+	}, [msgs])
 
 	const handleThrowClick = async e => {
 		e.preventDefault();
@@ -83,7 +81,7 @@ export default function App({ getToken }) {
 					// The request was made and the server responded with a status code
 					// that falls out of the range of 2xx
 					console.log(error.response.data);
-					myError = error.response.data.status + " " + error.response.data.message
+					myError = error.response.data.message
 				} else {
 					// Something happened in setting up the request that triggered an Error
 					console.log('Error', error.message);
@@ -117,7 +115,7 @@ export default function App({ getToken }) {
 					// The request was made and the server responded with a status code
 					// that falls out of the range of 2xx
 					console.log(error.response.data);
-					myError = error.response.data.status + " " + error.response.data.message
+					myError = error.response.data.message
 				} else {
 					// Something happened in setting up the request that triggered an Error
 					console.log('Error', error.message);

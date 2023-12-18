@@ -39,7 +39,7 @@ export default function Router() {
         <BrowserRouter>
             <Routes>
                 <Route path='*' element={<NotFound />} />
-                <Route path="/" element={<Header getToken={getToken}/>}>
+                <Route path="/" element={<Header getToken={getToken} logout={logout}/>}>
                     <Route path="/" element={<App getToken={getToken}/>} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
