@@ -9,7 +9,9 @@ import Selectors from '../components/App/GraphicValues/Selectors';
 import ResultTable from '../components/App/ResultTable';
 
 import './src/css/App.css';
-import '../canvas';
+import './src/js/canvas';
+import React from 'react';
+import { drawIsHitPoint } from './src/js/canvas_points'
 
 export default function App({ getToken }) {
 	const [xValue, setXValue] = useState()
@@ -28,6 +30,14 @@ export default function App({ getToken }) {
 				console.log(res.status);
 				console.log(res.data);
 				setResults(res.data);
+				// for (let i = 0; i < res.data.length; i++) {
+				// 	let point = res.data[i];
+				// 	drawIsHitPoint(
+				// 		point.x,
+				// 		point.y,
+				// 		point.r,
+				// 	)
+				// }
 			})
 			.catch(function (error) {
 				let myError = "";
@@ -130,7 +140,7 @@ export default function App({ getToken }) {
 	return (
 		<div className="App">
 			<div className="card flex flex-column justify-content-center align-items-center">
-				<Canvas />
+				<Canvas rValue={rValue} isCorrectR={isCorrectR}/>
 				<Selectors
 					xValue={xValue} setXValue={setXValue} isCorrectX={isCorrectX} setIsCorrectX={setIsCorrectX}
 					yValue={yValue} setYValue={setYValue} isCorrectY={isCorrectY} setIsCorrectY={setIsCorrectY}

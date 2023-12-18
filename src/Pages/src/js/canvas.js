@@ -7,7 +7,7 @@ window.onload = function () {
 // const HIDDEN_R = document.getElementById("hidden-form:hidden-r");
 // const HIDDEN_BUTTON = document.getElementById("hidden-form:hidden-send");
 
-function drawBeginnigGraph(canvasIdStr) {
+export function drawBeginnigGraph(canvasIdStr) {
     let canvas = document.getElementById(canvasIdStr)
 
     if (canvas === null)
