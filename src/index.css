@@ -17,12 +17,12 @@ body {
 }
 
 #canvas {
-    z-index: 4;
+    z-index: 0;
     position: relative;
 }
 
 .addedCanvas {
-    z-index: 5;
+    z-index: 1;
     position: absolute;
     /* left: 50%; */
     transform: translateX(-100%) translateY(0%);

@@ -140,7 +140,7 @@ export default function App({ getToken }) {
 	return (
 		<div className="App">
 			<div className="card flex flex-column justify-content-center align-items-center">
-				<Canvas rValue={rValue} isCorrectR={isCorrectR}/>
+				<Canvas rValue={rValue} isCorrectR={isCorrectR} setResults={setResults} />
 				<Selectors
 					xValue={xValue} setXValue={setXValue} isCorrectX={isCorrectX} setIsCorrectX={setIsCorrectX}
 					yValue={yValue} setYValue={setYValue} isCorrectY={isCorrectY} setIsCorrectY={setIsCorrectY}

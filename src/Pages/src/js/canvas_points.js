@@ -77,10 +77,12 @@ export function drawIsHitPoint(xValue, yValue, rValue, isHit, permanentCanvasID,
         let yValueRotate = yValue
         if (isHit) {
             drawPoint(xValueRotate, yValue, rValue, isHit, axeSrc, rotation, permanentCanvasID, false)
+            document.getElementById(animatedCanvasID).remove();
         } else {
             frameRestCount = frameCount
             setTimeout(drawNotHit)
         }
+
         function drawNotHit() {
             xValueRotate -= rValue / frameCount * rValueScale / 2
             yValueRotate -= ((xValue - xValueRotate) ** 2) / frameCount * 4
@@ -92,6 +94,8 @@ export function drawIsHitPoint(xValue, yValue, rValue, isHit, permanentCanvasID,
             frameRestCount--
             if (frameRestCount != 0) {
                 setTimeout(drawNotHit, 10)
+            } else {
+                document.getElementById(animatedCanvasID).remove();
             }
         }
     }
