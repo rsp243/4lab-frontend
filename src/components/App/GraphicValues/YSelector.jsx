@@ -14,6 +14,7 @@ export default function YSelector({ selectedY, setSelectedY, isCorrectY, setIsCo
         } else {
             setIsCorrectY(true)
         }
+        setSelectedY(e)
     }
 
     return (
@@ -23,18 +24,13 @@ export default function YSelector({ selectedY, setSelectedY, isCorrectY, setIsCo
                     <InputText
                         value={selectedY}
                         onChange={(e) => {
-                            setSelectedY(e.target.value)
                             handleChange(e.target.value)
                         }}
                         placeholder="Select Y value"
-                        className="w-full"
-                        step={0.1}
-                        min={minValue}
-                        max={maxValue} />
+                        className="w-full"/>
                     <Slider
                         value={selectedY}
                         onChange={(e) => {
-                            setSelectedY(e.value)
                             handleChange(e.value)
                         }}
                         className="w-full"
