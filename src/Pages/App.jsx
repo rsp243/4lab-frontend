@@ -11,7 +11,9 @@ import ResultTable from '../components/App/ResultTable';
 import './src/css/App.css';
 import './src/js/canvas';
 import React from 'react';
-import { drawIsHitPoint } from './src/js/canvas_points'
+import { drawIsHitPoint, drawPoint } from './src/js/canvas_points'
+import { drawBeginnigGraph } from "./src/js/canvas"
+import fissureSrc from './src/img/fissure.png';
 
 export default function App({ getToken }) {
 	const [xValue, setXValue] = useState()
@@ -30,14 +32,17 @@ export default function App({ getToken }) {
 				console.log(res.status);
 				console.log(res.data);
 				setResults(res.data);
-				// for (let i = 0; i < res.data.length; i++) {
-				// 	let point = res.data[i];
-				// 	drawIsHitPoint(
-				// 		point.x,
-				// 		point.y,
-				// 		point.r,
-				// 	)
-				// }
+				for (let i = 0; i < res.data.length; i++) {
+					let point = res.data[i];
+					drawPoint(
+						point.x,
+						point.y,
+						point.r, false, 
+						fissureSrc,
+						0,
+						"canvas",
+						false)
+				}
 			})
 			.catch(function (error) {
 				let myError = "";
@@ -78,9 +83,24 @@ export default function App({ getToken }) {
 			.then(res => {
 				console.log(res.status);
 				console.log(res.data);
+
+				let point = res.data
+
+				let isHitBool = true
+				if (point.isHit == "MISS") {
+					isHitBool = false
+				}
+				drawIsHitPoint(
+					point.x,
+					point.y,
+					point.r,
+					isHitBool,
+					"canvas", "canvas1")
+
 				setResults(results => (
 					[...results, res.data]
 				))
+
 				msgs.current.show([
 					{ sticky: false, life: 2000, severity: 'success', summary: 'Success', detail: 'Successfully Thrown', closable: false },
 				])
@@ -115,6 +135,8 @@ export default function App({ getToken }) {
 				console.log(res.status);
 				console.log(res.data);
 				setResults([])
+				drawBeginnigGraph("canvas")
+
 				msgs.current.show([
 					{ sticky: false, life: 2000, severity: 'success', summary: 'Success', detail: res.data.message, closable: false },
 				])

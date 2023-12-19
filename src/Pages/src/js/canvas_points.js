@@ -83,7 +83,7 @@ export function drawIsHitPoint(xValue, yValue, rValue, isHit, permanentCanvasID,
 
         function drawNotHit() {
             xValueRotate -= rValue / frameCount * rValueScale / 2
-            yValueRotate += ((xValue - xValueRotate) ** 2) / frameCount * 4
+            yValueRotate -= ((xValue - xValueRotate) ** 2) / frameCount * 4
 
             angle = (Math.random() * (23 - 2) + 2 + angle) % 360
             let rotation = angle * Math.PI / 180

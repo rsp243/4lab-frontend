@@ -6,11 +6,6 @@ import { Message } from 'primereact/message';
 
 export default function RSelector({ selectedR, setSelectedR, isCorrectR, setIsCorrectR }) {
 	const values = [
-		{ name: '-2.0' },
-		{ name: '-1.5' },
-		{ name: '-1.0' },
-		{ name: '-0.5' },
-		{ name: '0.0' },
 		{ name: '0.5' },
 		{ name: '1.0' },
 		{ name: '1.5' },
