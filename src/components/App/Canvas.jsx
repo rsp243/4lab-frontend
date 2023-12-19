@@ -41,7 +41,18 @@ export default function Canvas({ rValue, isCorrectR, setResults }) {
                 // animating and drawing
                 // canvasCounter++;
 
-                drawIsHitPoint(xValue, yValue, rValueNum, true, "canvas", newCanvasId)
+                let point = res.data
+
+                let isHitBool = true
+                if (point.isHit == "MISS") {
+                    isHitBool = false
+                }
+                drawIsHitPoint(
+                    point.x,
+                    point.y,
+                    point.r, 
+                    isHitBool,
+                    "canvas", newCanvasId)
 
                 setResults(results => (
                     [...results, res.data]

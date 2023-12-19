@@ -34,17 +34,15 @@ export function drawPoint(xValue, yValue, rValue, isHit, imageSrc, rotationAngle
     let canvas = document.getElementById(canvasID),
         ctx = canvas.getContext('2d');
 
-    if (imageSrc == axeSrc) {
-        drawAnimatedRotatedPoint(xValue, yValue, rValue, axeHeight, imageSrc, axeHeight * 5, - axeHeight, rotationAngle, ctx, isAnimated)
+    if (axeSrc == imageSrc) {
+        if (isAnimated) {
+            drawAnimatedRotatedPoint(xValue, yValue, rValue, axeHeight, imageSrc, 0, 0, rotationAngle, ctx, isAnimated)
+        } else {
+            drawAnimatedRotatedPoint(xValue, yValue, rValue, axeHeight, imageSrc, 0, 0, rotationAngle, ctx, isAnimated)
+        }
     } else {
-        drawAnimatedRotatedPoint(xValue, yValue, rValue, fissureHeight, imageSrc, 0, 0, rotationAngle, ctx, isAnimated)
+        drawAnimatedRotatedPoint(xValue, yValue, rValue, fissureHeight, imageSrc, - fissureHeight * 5, - fissureHeight * 5, rotationAngle, ctx, isAnimated)
     }
-
-    // if (isAxe) {
-    //     drawAnimatedRotatedPoint(xValue, yValue, rValue, axeHeight, imageSrc, axeHeight * 5, - axeHeight, rotationAngle, ctx)
-    // } else {
-    //     drawAnimatedRotatedPoint(xValue, yValue, rValue, fissureHeight, imageSrc, 0, 0, rotationAngle, ctx)
-    // }
 }
 
 export function drawIsHitPoint(xValue, yValue, rValue, isHit, permanentCanvasID, animatedCanvasID) {
@@ -85,7 +83,7 @@ export function drawIsHitPoint(xValue, yValue, rValue, isHit, permanentCanvasID,
 
         function drawNotHit() {
             xValueRotate -= rValue / frameCount * rValueScale / 2
-            yValueRotate -= ((xValue - xValueRotate) ** 2) / frameCount * 4
+            yValueRotate += ((xValue - xValueRotate) ** 2) / frameCount * 4
 
             angle = (Math.random() * (23 - 2) + 2 + angle) % 360
             let rotation = angle * Math.PI / 180
