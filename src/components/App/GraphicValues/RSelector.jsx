@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 
 import { Dropdown } from 'primereact/dropdown';
 import { Message } from 'primereact/message';
+import { drawBeginnigGraph } from "../../../Pages/src/js/canvas"
 
 export default function RSelector({ selectedR, setSelectedR, isCorrectR, setIsCorrectR }) {
 	const values = [
-		{ name: '0.5' },
 		{ name: '1.0' },
 		{ name: '1.5' },
 		{ name: '2.0' },
+		{ name: '2.5' },
 	];
 
 	function handleChange(e) {
 		if (!values.includes(e)) {
 			setIsCorrectR(false)
 		} else {
+			drawBeginnigGraph("canvas")
 			setIsCorrectR(true)
 		}
 	}

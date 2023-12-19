@@ -93,10 +93,10 @@ export function drawIsHitPoint(xValue, yValue, rValue, isHit, permanentCanvasID,
             if (frameRestCount != 0) {
                 setTimeout(drawNotHit, 10)
             } else {
-                // let canvas = document.getElementById(animatedCanvasID),
-                //     ctx1 = canvas.getContext('2d');
+                let canvas = document.getElementById("canvas1"),
+                    ctx1 = canvas.getContext('2d');
 
-                // ctx1.clearRect(0, 0, canvas.width, canvas.height);
+                ctx1.clearRect(0, 0, canvas.width, canvas.height);
             }
         }
     }
