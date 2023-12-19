@@ -179,6 +179,7 @@ export default function App({ getToken }) {
 				<Messages ref={msgs} />
 			</div>
 			<ResultTable results={results} />
+			<div style={{"height": "50px"}}></div>
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import { Column } from 'primereact/column';
 
 export default function ResultTable({results}) {
     return (
-        <DataTable className="mb-8 mx-4 mx-auto" scrollable scrollHeight="400px" value={results} tableStyle={{ maxWidth: '70rem', margin: "0 auto" }}>
+        <DataTable scrollable scrollHeight="400px" value={results} tableStyle={{ maxWidth: '70rem', margin: "0 auto" }}>
             <Column field="x" header="X Value" sortable></Column>
             <Column field="y" header="Y Value" sortable></Column>
             <Column field="r" header="R Value" sortable></Column>
