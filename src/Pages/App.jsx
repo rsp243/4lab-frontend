@@ -65,6 +65,11 @@ export default function App({ getToken }) {
 	const handleThrowClick = async e => {
 		e.preventDefault();
 
+		if (yValue < -3 || yValue > 5) {
+			setIsCorrectY(false)
+			setYValue(-3)
+		}
+
 		if (!(isCorrectX && isCorrectY && isCorrectR)) {
 			msgs.current.show([
 				{ sticky: false, life: 5000, severity: 'error', summary: 'Error', detail: 'You chose invalid values in selectors. Fix all error messages', closable: false },
@@ -172,8 +177,8 @@ export default function App({ getToken }) {
 					handleThrowClick={handleThrowClick}
 					handleAnotherAttemptClick={handleAnotherAttemptClick} />
 				<Messages ref={msgs} />
-				<ResultTable results={results} />
 			</div>
+			<ResultTable results={results} />
 		</div>
 	);
 }

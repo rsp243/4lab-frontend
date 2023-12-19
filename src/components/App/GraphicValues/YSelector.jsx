@@ -9,7 +9,7 @@ export default function YSelector({ selectedY, setSelectedY, isCorrectY, setIsCo
     let minValue = -3
     let maxValue = 5
     function handleChange(e) {
-        if (!(minValue <= e <= maxValue)) {
+        if (!(minValue <= selectedY && selectedY <= maxValue)) {
             setIsCorrectY(false)
         } else {
             setIsCorrectY(true)
@@ -22,14 +22,14 @@ export default function YSelector({ selectedY, setSelectedY, isCorrectY, setIsCo
             <div className="card flex justify-content-center my-3">
                 <div className="w-14rem">
                     <InputText
-                        value={selectedY}
+                        value={selectedY || ""}
                         onChange={(e) => {
                             handleChange(e.target.value)
                         }}
                         placeholder="Select Y value"
                         className="w-full"/>
                     <Slider
-                        value={selectedY}
+                        value={selectedY || ""}
                         onChange={(e) => {
                             handleChange(e.value)
                         }}
