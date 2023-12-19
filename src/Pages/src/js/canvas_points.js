@@ -2,14 +2,15 @@ import axeSrc from '../img/axe.png';
 import fissureSrc from '../img/fissure.png';
 import { drawBeginnigGraph } from "./canvas"
 
-export function drawAnimatedRotatedPoint(xValue, yValue, rValue, imgHeight, imageSrc, offsetX, offsetY, rotationAngle, ctx, isAnimated) {
+export function drawAnimatedRotatedPoint(xValue, yValue, rValue, imgHeight, imageSrc, offsetX, offsetY, rotationAngle, ctx) {
     let canvas = document.getElementById("canvas");
+
+    let canvas1 = document.getElementById("canvas1"),
+        ctx1 = canvas1.getContext('2d');
 
     let img = new Image()
     img.onload = function () {
-        if (isAnimated) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
+        ctx1.clearRect(0, 0, canvas.width, canvas.height);
         let xOnCanvas = canvas.width / 2 + canvas.width / 3 * (xValue / rValue)
         let yOnCanvas = canvas.width / 2 - canvas.width / 3 * (yValue / rValue)
 
@@ -77,7 +78,6 @@ export function drawIsHitPoint(xValue, yValue, rValue, isHit, permanentCanvasID,
         let yValueRotate = yValue
         if (isHit) {
             drawPoint(xValueRotate, yValue, rValue, isHit, axeSrc, rotation, permanentCanvasID, false)
-            document.getElementById(animatedCanvasID).remove();
         } else {
             frameRestCount = frameCount
             setTimeout(drawNotHit)
@@ -89,13 +89,16 @@ export function drawIsHitPoint(xValue, yValue, rValue, isHit, permanentCanvasID,
 
             angle = (Math.random() * (23 - 2) + 2 + angle) % 360
             let rotation = angle * Math.PI / 180
-            drawPoint(xValueRotate, yValueRotate, rValue, isHit, axeSrc, rotation, permanentCanvasID, true)
+            drawPoint(xValueRotate, yValueRotate, rValue, isHit, axeSrc, rotation, animatedCanvasID, true)
 
             frameRestCount--
             if (frameRestCount != 0) {
                 setTimeout(drawNotHit, 10)
             } else {
-                document.getElementById(animatedCanvasID).remove();
+                // let canvas = document.getElementById(animatedCanvasID),
+                //     ctx1 = canvas.getContext('2d');
+
+                // ctx1.clearRect(0, 0, canvas.width, canvas.height);
             }
         }
     }
